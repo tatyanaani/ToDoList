@@ -20,23 +20,36 @@ struct ListView: View {
             else{
                 List{
                     
-                    Section(header: Text("To do ❤️")) {
-                        ForEach(listViewModel.items) { item in
-                            ListRowView(item: item)
-                                .onTapGesture {
-                                    withAnimation(.linear){
-                                        //item.isCompleted.toggle()
-                                        listViewModel.updateItemStatus(item: item)
+                    if listViewModel.items.contains(where: {!$0.isCompleted}){
+                        Section(header: Text("To do ❤️")) {
+                            ForEach(listViewModel.items.filter { !$0.isCompleted }) { item in
+                                ListRowView(item: item)
+                                    .onTapGesture {
+                                        withAnimation(.linear){
+                                            //item.isCompleted.toggle()
+                                            listViewModel.updateItemStatus(item: item)
+                                        }
                                     }
-                                }
+                            }
+                            .onDelete(perform: listViewModel.deleteItem)
+                            .onMove(perform: listViewModel.moveItem)
                         }
-                        .onDelete(perform: listViewModel.deleteItem)
-                        .onMove(perform: listViewModel.moveItem)
                     }
                     
-                    
-                    Section(header: Text("Done ⭐️")) {
-                        
+                    if listViewModel.items.contains(where: {$0.isCompleted}){
+                        Section(header: Text("Done ⭐️")) {
+                            ForEach(listViewModel.items.filter { $0.isCompleted }) { item in
+                                ListRowView(item: item)
+                                    .onTapGesture {
+                                        withAnimation(.linear){
+                                            //item.isCompleted.toggle()
+                                            listViewModel.updateItemStatus(item: item)
+                                        }
+                                    }
+                            }
+                            .onDelete(perform: listViewModel.deleteItem)
+                            .onMove(perform: listViewModel.moveItem)
+                        }
                     }
                     
                 }
