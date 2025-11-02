@@ -54,6 +54,7 @@ struct ListView: View {
                         ) {
                             ForEach(listViewModel.items.filter { $0.isCompleted }) { item in
                                 ListRowView(item: item)
+                                    .listRowBackground(Color.green.opacity(0.2))
                                     .onTapGesture {
                                         withAnimation(.linear){
                                             //item.isCompleted.toggle()
@@ -64,7 +65,6 @@ struct ListView: View {
                             .onDelete(perform: listViewModel.deleteItem)
                             .onMove(perform: listViewModel.moveItem)
                         }
-                        .tint(.green.opacity(0.7))
                     }
                     
                 }
