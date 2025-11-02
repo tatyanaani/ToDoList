@@ -10,7 +10,7 @@ import SwiftUI
 struct ListView: View {
     
     @EnvironmentObject var listViewModel: ListViewModel
-        
+   
     var body: some View {
         ZStack{
             if listViewModel.items.isEmpty {
@@ -20,8 +20,19 @@ struct ListView: View {
             else{
                 List{
                     
-                    if listViewModel.items.contains(where: {!$0.isCompleted}){
-                        Section(header: Text("To do ❤️")) {
+                    let todoItems = listViewModel.items.filter { !$0.isCompleted }
+                    let doneItems = listViewModel.items.filter { $0.isCompleted }
+                    
+                        Section(header:
+                                    Text("To do ❤️")
+                            .font(.title.bold())
+                            .foregroundStyle(.primary)
+                            ) {
+                            if todoItems.isEmpty {
+                                Text ("You've done everything 🥳")
+                                    .font(.headline)
+                                    .foregroundColor(.gray.opacity(0.7))
+                            }
                             ForEach(listViewModel.items.filter { !$0.isCompleted }) { item in
                                 ListRowView(item: item)
                                     .onTapGesture {
@@ -33,11 +44,14 @@ struct ListView: View {
                             }
                             .onDelete(perform: listViewModel.deleteItem)
                             .onMove(perform: listViewModel.moveItem)
-                        }
                     }
                     
                     if listViewModel.items.contains(where: {$0.isCompleted}){
-                        Section(header: Text("Done ⭐️")) {
+                        Section(header:
+                                    Text("Done ⭐️")
+                            .font(.title.bold())
+                            .foregroundStyle(.primary)
+                        ) {
                             ForEach(listViewModel.items.filter { $0.isCompleted }) { item in
                                 ListRowView(item: item)
                                     .onTapGesture {
@@ -50,6 +64,7 @@ struct ListView: View {
                             .onDelete(perform: listViewModel.deleteItem)
                             .onMove(perform: listViewModel.moveItem)
                         }
+                        .tint(.green.opacity(0.7))
                     }
                     
                 }
