@@ -93,4 +93,61 @@ class ListViewModel: ObservableObject {
             UserDefaults.standard.set(encodedData, forKey: itemsKey)
         }
     }
+    
+    
+    
+    
+//    func deleteTodoItems(at offsets: IndexSet) {
+//            let todoItems = items.filter { !$0.isCompleted }
+//            offsets.forEach { index in
+//                if let realIndex = items.firstIndex(where: { $0.id == todoItems[index].id }) {
+//                    items.remove(at: realIndex)
+//                }
+//            }
+//        }
+//
+//        func deleteDoneItems(at offsets: IndexSet) {
+//            let doneItems = items.filter { $0.isCompleted }
+//            offsets.forEach { index in
+//                if let realIndex = items.firstIndex(where: { $0.id == doneItems[index].id }) {
+//                    items.remove(at: realIndex)
+//                }
+//            }
+//        }
+    
+    
+    
+    
+    
+//    func moveTodoItems(from source: IndexSet, to destination: Int) {
+//            let todoItems = items.filter { !$0.isCompleted }
+//            var sourceIndices: [Int] = []
+//            
+//            for index in source {
+//                if let realIndex = items.firstIndex(where: { $0.id == todoItems[index].id }) {
+//                    sourceIndices.append(realIndex)
+//                }
+//            }
+//            
+//            for from in sourceIndices.sorted(by: >) {
+//                items.move(fromOffsets: IndexSet(integer: from),
+//                           toOffset: destination > from ? destination - 1 : destination)
+//            }
+//        }
+//        
+//        func moveDoneItems(from source: IndexSet, to destination: Int) {
+//            let doneItems = items.filter { $0.isCompleted }
+//            var sourceIndices: [Int] = []
+//            
+//            for index in source {
+//                if let realIndex = items.firstIndex(where: { $0.id == doneItems[index].id }) {
+//                    sourceIndices.append(realIndex)
+//                }
+//            }
+//            
+//            for from in sourceIndices.sorted(by: >) {
+//                items.move(fromOffsets: IndexSet(integer: from),
+//                           toOffset: destination > from ? destination - 1 : destination)
+//            }
+//        }
 }
