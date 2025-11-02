@@ -21,7 +21,6 @@ struct ListView: View {
                 List{
                     
                     let todoItems = listViewModel.items.filter { !$0.isCompleted }
-                    let doneItems = listViewModel.items.filter { $0.isCompleted }
                     
                         Section(header:
                                     Text("To do ❤️")
