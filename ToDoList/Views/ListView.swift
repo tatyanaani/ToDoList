@@ -19,17 +19,26 @@ struct ListView: View {
             }
             else{
                 List{
-                    ForEach(listViewModel.items) { item in
-                        ListRowView(item: item)
-                            .onTapGesture {
-                                withAnimation(.linear){
-        //                            item.isCompleted.toggle()
-                                    listViewModel.updateItemStatus(item: item)
+                    
+                    Section(header: Text("To do ❤️")) {
+                        ForEach(listViewModel.items) { item in
+                            ListRowView(item: item)
+                                .onTapGesture {
+                                    withAnimation(.linear){
+                                        //item.isCompleted.toggle()
+                                        listViewModel.updateItemStatus(item: item)
+                                    }
                                 }
-                            }
+                        }
+                        .onDelete(perform: listViewModel.deleteItem)
+                        .onMove(perform: listViewModel.moveItem)
                     }
-                    .onDelete(perform: listViewModel.deleteItem)
-                    .onMove(perform: listViewModel.moveItem)
+                    
+                    
+                    Section(header: Text("Done ⭐️")) {
+                        
+                    }
+                    
                 }
                 .listStyle(PlainListStyle())
             }
